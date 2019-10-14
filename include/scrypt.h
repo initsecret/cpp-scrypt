@@ -9,7 +9,7 @@ class scrypt
 {
 public:
   // Eventually, I want to modify this to take in a PRF and a MF as in MFcrypt
-  // algorithm in [SCRYPT]. For now, we take a the scrypt defaults (HMAC_SHA256,
+  // algorithm in [SCRYPT]. For now, we use the scrypt defaults (HMAC_SHA256,
   // ROMMix).
   scrypt();
 

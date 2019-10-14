@@ -5,8 +5,8 @@
 #include <sstream>
 #include <vector>
 
-#include "salsa20.h"
-#include "scrypt.h"
+#include <salsa20.h>
+#include <scrypt.h>
 
 using namespace std;
 
@@ -18,4 +18,6 @@ main()
 
   scrypt TestScrypt;
   TestScrypt.test();
+
+  cout << "All tests succeeded!!\n";
 }

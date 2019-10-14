@@ -15,22 +15,25 @@ find_library(GMP gmp)
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
 
+include_directories(include)
+
 set(
     SOURCES
-    main.cc
-    scrypt.h
-    scrypt.cc
-    salsa20.h
-    salsa20.cc
-    pbkdf2.h
-    pbkdf2.cc
-    utilities.h
-    utilities.cc
+    include/scrypt.h
+    src/scrypt.cc
+    include/salsa20.h
+    src/salsa20.cc
+    include/pbkdf2.h
+    src/pbkdf2.cc
+    include/utilities.h
+    src/utilities.cc
     )
 
-add_executable(main ${SOURCES})
-target_link_libraries(main OpenSSL::Crypto)
-#target_link_libraries(main gmpxx)
-#target_link_libraries(main gmp)
-# Linking gmp the old school way.
-target_link_libraries(main "${GMP}")
+add_library(cpp-scrypt SHARED ${SOURCES})
+set(PROJECT_VERSION 0.1)
+set_target_properties(cpp-scrypt PROPERTIES VERSION ${PROJECT_VERSION})
+target_link_libraries(cpp-scrypt OpenSSL::Crypto)
+target_link_libraries(cpp-scrypt "${GMP}")
+
+enable_testing()
+add_subdirectory(test)
