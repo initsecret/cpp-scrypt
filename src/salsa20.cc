@@ -38,31 +38,31 @@ rowround(std::vector<uint32_t> y)
 
   std::vector<uint32_t> q1 =
     quarterround({ y.at(0), y.at(1), y.at(2), y.at(3) });
-  z[0] = q1.at(0);
-  z[1] = q1.at(1);
-  z[2] = q1.at(2);
-  z[3] = q1.at(3);
+  z.at(0) = q1.at(0);
+  z.at(1) = q1.at(1);
+  z.at(2) = q1.at(2);
+  z.at(3) = q1.at(3);
 
   std::vector<uint32_t> q2 =
     quarterround({ y.at(5), y.at(6), y.at(7), y.at(4) });
-  z[5] = q2.at(0);
-  z[6] = q2.at(1);
-  z[7] = q2.at(2);
-  z[4] = q2.at(3);
+  z.at(5) = q2.at(0);
+  z.at(6) = q2.at(1);
+  z.at(7) = q2.at(2);
+  z.at(4) = q2.at(3);
 
   std::vector<uint32_t> q3 =
     quarterround({ y.at(10), y.at(11), y.at(8), y.at(9) });
-  z[10] = q3.at(0);
-  z[11] = q3.at(1);
-  z[8] = q3.at(2);
-  z[9] = q3.at(3);
+  z.at(10) = q3.at(0);
+  z.at(11) = q3.at(1);
+  z.at(8) = q3.at(2);
+  z.at(9) = q3.at(3);
 
   std::vector<uint32_t> q4 =
     quarterround({ y.at(15), y.at(12), y.at(13), y.at(14) });
-  z[15] = q4.at(0);
-  z[12] = q4.at(1);
-  z[13] = q4.at(2);
-  z[14] = q4.at(3);
+  z.at(15) = q4.at(0);
+  z.at(12) = q4.at(1);
+  z.at(13) = q4.at(2);
+  z.at(14) = q4.at(3);
 
   return z;
 }
@@ -76,31 +76,31 @@ columnround(std::vector<uint32_t> x)
 
   std::vector<uint32_t> q1 =
     quarterround({ x.at(0), x.at(4), x.at(8), x.at(12) });
-  y[0] = q1.at(0);
-  y[4] = q1.at(1);
-  y[8] = q1.at(2);
-  y[12] = q1.at(3);
+  y.at(0) = q1.at(0);
+  y.at(4) = q1.at(1);
+  y.at(8) = q1.at(2);
+  y.at(12) = q1.at(3);
 
   std::vector<uint32_t> q2 =
     quarterround({ x.at(5), x.at(9), x.at(13), x.at(1) });
-  y[5] = q2.at(0);
-  y[9] = q2.at(1);
-  y[13] = q2.at(2);
-  y[1] = q2.at(3);
+  y.at(5) = q2.at(0);
+  y.at(9) = q2.at(1);
+  y.at(13) = q2.at(2);
+  y.at(1) = q2.at(3);
 
   std::vector<uint32_t> q3 =
     quarterround({ x.at(10), x.at(14), x.at(2), x.at(6) });
-  y[10] = q3.at(0);
-  y[14] = q3.at(1);
-  y[2] = q3.at(2);
-  y[6] = q3.at(3);
+  y.at(10) = q3.at(0);
+  y.at(14) = q3.at(1);
+  y.at(2) = q3.at(2);
+  y.at(6) = q3.at(3);
 
   std::vector<uint32_t> q4 =
     quarterround({ x.at(15), x.at(3), x.at(7), x.at(11) });
-  y[15] = q4.at(0);
-  y[3] = q4.at(1);
-  y[7] = q4.at(2);
-  y[11] = q4.at(3);
+  y.at(15) = q4.at(0);
+  y.at(3) = q4.at(1);
+  y.at(7) = q4.at(2);
+  y.at(11) = q4.at(3);
 
   return y;
 }

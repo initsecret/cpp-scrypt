@@ -6,6 +6,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <limits>
 
 pbkdf2::pbkdf2(const EVP_MD* d)
   : digest{ d }
@@ -29,17 +30,37 @@ pbkdf2::hash(std::vector<std::byte> passphrase,
   auto output = new unsigned char[desired_length];
 
   if (!output) {
-    std::cout << "Could not allocate output buffer\n";
+    std::cout << "Could not allocate output buffer.\n";
+    assert(false);
+  }
+
+  if (iterations >= std::numeric_limits<int>::max()) {
+    std::cout << "More iterations than INT_MAX.\n";
+    assert(false);
+  }
+
+  if (desired_length >= std::numeric_limits<int>::max()) {
+    std::cout << "desired_length larger than INT_MAX.\n";
+    assert(false);
+  }
+
+  if (passphrase.size() >= std::numeric_limits<int>::max()) {
+    std::cout << "passphrase.size() larger than INT_MAX.\n";
+    assert(false);
+  }
+
+  if (salt.size() >= std::numeric_limits<int>::max()) {
+    std::cout << "salt.size() larger than INT_MAX.\n";
     assert(false);
   }
 
   int res = PKCS5_PBKDF2_HMAC(passphrase_as_chars,
-                              passphrase.size(),
+                              static_cast<int>(passphrase.size()),
                               salt_as_uchars,
-                              salt.size(),
-                              iterations,
+                              static_cast<int>(salt.size()),
+                              static_cast<int>(iterations),
                               digest,
-                              desired_length,
+                              static_cast<int>(desired_length),
                               output);
 
   if (res == 0) {
