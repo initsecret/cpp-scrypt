@@ -6,11 +6,11 @@
 #include <cstddef>
 #include <vector>
 
-class pbkdf2 {
+class PBKDF2 {
   const EVP_MD* digest;
 
  public:
-  pbkdf2(const EVP_MD* d);
+  PBKDF2(const EVP_MD* d);
 
   std::vector<std::byte> hash(std::vector<std::byte> passphrase,
                               std::vector<std::byte> salt, uint32_t iterations,

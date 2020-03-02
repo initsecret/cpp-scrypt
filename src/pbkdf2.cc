@@ -10,9 +10,9 @@
 
 #include "utilities.h"
 
-pbkdf2::pbkdf2(const EVP_MD* d) : digest{d} {}
+PBKDF2::PBKDF2(const EVP_MD* d) : digest{d} {}
 
-std::vector<std::byte> pbkdf2::hash(std::vector<std::byte> passphrase,
+std::vector<std::byte> PBKDF2::hash(std::vector<std::byte> passphrase,
                                     std::vector<std::byte> salt,
                                     uint32_t iterations,
                                     size_t desired_length) {

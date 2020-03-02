@@ -8,7 +8,7 @@
 namespace {
 // From Section 11 of the Scrypt RFC
 TEST(PBKDF2Test, ScryptRFCSanity0) {
-  pbkdf2 PBKDF(EVP_sha256());
+  PBKDF2 PBKDF(EVP_sha256());
   std::vector<std::byte> pbkdf_out_0 =
       PBKDF.hash(utilities::stringToBytes("passwd"),
                  utilities::stringToBytes("salt"), 1, 64);
@@ -21,7 +21,7 @@ TEST(PBKDF2Test, ScryptRFCSanity0) {
 }
 
 TEST(PBKDF2Test, ScryptRFCSanity1) {
-  pbkdf2 PBKDF(EVP_sha256());
+  PBKDF2 PBKDF(EVP_sha256());
   std::vector<std::byte> pbkdf_out_1 =
       PBKDF.hash(utilities::stringToBytes("Password"),
                  utilities::stringToBytes("NaCl"), 80000, 64);

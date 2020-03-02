@@ -145,7 +145,7 @@ std::vector<std::byte> Scrypt::hash(std::vector<std::byte> passphrase,
 
   uint32_t block_size = 128 * block_size_factor_r;
 
-  pbkdf2 PBKDF2_SHA256(EVP_sha256());
+  PBKDF2 PBKDF2_SHA256(EVP_sha256());
 
   std::vector<std::byte> expensive_salt = PBKDF2_SHA256.hash(
       passphrase, salt, 1, block_size * parallelization_factor_p);
