@@ -3,6 +3,7 @@
 
 #include <openssl/evp.h>
 
+#include <cstddef>
 #include <vector>
 
 class pbkdf2 {
