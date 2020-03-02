@@ -4,9 +4,8 @@
 #include <cstddef>
 #include <vector>
 
-class utilities
-{
-public:
+class utilities {
+ public:
   utilities();
 
   static std::string bytesToHex(std::vector<std::byte> data);
@@ -15,4 +14,4 @@ public:
   static std::vector<std::byte> stringToBytes(std::string s);
 };
 
-#endif // UTILITIES_H
+#endif  // UTILITIES_H

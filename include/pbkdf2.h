@@ -1,21 +1,19 @@
 #ifndef PBKDF2_H
 #define PBKDF2_H
 
-#include <vector>
-
 #include <openssl/evp.h>
 
-class pbkdf2
-{
+#include <vector>
+
+class pbkdf2 {
   const EVP_MD* digest;
 
-public:
+ public:
   pbkdf2(const EVP_MD* d);
 
   std::vector<std::byte> hash(std::vector<std::byte> passphrase,
-                              std::vector<std::byte> salt,
-                              uint32_t iterations,
+                              std::vector<std::byte> salt, uint32_t iterations,
                               size_t desired_length);
 };
 
-#endif // PBKDF2_H
+#endif  // PBKDF2_H

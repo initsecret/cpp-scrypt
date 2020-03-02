@@ -2,22 +2,18 @@
 
 #include "pbkdf2.h"
 
-#include "utilities.h"
-
 #include <cstdlib>
 #include <iostream>
 #include <limits>
 
-pbkdf2::pbkdf2(const EVP_MD* d)
-  : digest{ d }
-{}
+#include "utilities.h"
 
-std::vector<std::byte>
-pbkdf2::hash(std::vector<std::byte> passphrase,
-             std::vector<std::byte> salt,
-             uint32_t iterations,
-             size_t desired_length)
-{
+pbkdf2::pbkdf2(const EVP_MD* d) : digest{d} {}
+
+std::vector<std::byte> pbkdf2::hash(std::vector<std::byte> passphrase,
+                                    std::vector<std::byte> salt,
+                                    uint32_t iterations,
+                                    size_t desired_length) {
   // Turn input into format expected by OpenSSL
   auto passphrase_as_chars = new char[passphrase.size()];
   for (size_t i = 0; i < passphrase.size(); ++i) {
@@ -54,14 +50,10 @@ pbkdf2::hash(std::vector<std::byte> passphrase,
     assert(false);
   }
 
-  int res = PKCS5_PBKDF2_HMAC(passphrase_as_chars,
-                              static_cast<int>(passphrase.size()),
-                              salt_as_uchars,
-                              static_cast<int>(salt.size()),
-                              static_cast<int>(iterations),
-                              digest,
-                              static_cast<int>(desired_length),
-                              output);
+  int res = PKCS5_PBKDF2_HMAC(
+      passphrase_as_chars, static_cast<int>(passphrase.size()), salt_as_uchars,
+      static_cast<int>(salt.size()), static_cast<int>(iterations), digest,
+      static_cast<int>(desired_length), output);
 
   if (res == 0) {
     std::cout << "PKCS5_PBKDF2_HMAC failed.\n";
