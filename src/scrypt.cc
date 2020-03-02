@@ -7,7 +7,10 @@
 
 #include <gmpxx.h>
 
+#include <cassert>
+#include <cstddef>
 #include <iostream>
+#include <memory>
 #include <string>
 
 #include "pbkdf2.h"

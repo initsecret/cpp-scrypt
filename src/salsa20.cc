@@ -3,6 +3,8 @@
 
 #include "salsa20.h"
 
+#include <cassert>
+#include <cstddef>
 #include <iomanip>
 #include <iostream>
 

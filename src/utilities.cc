@@ -2,6 +2,7 @@
 
 #include "utilities.h"
 
+#include <cstddef>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
