@@ -12,6 +12,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <thread>
 
 #include "pbkdf2.h"
 #include "salsa20.h"
@@ -151,22 +152,38 @@ std::vector<std::byte> Scrypt::hash(std::vector<std::byte> passphrase,
 
   // Let us split expensive salt into B0, B1,...,B(p-1) each with block_size
   // bytes.
-  std::vector<std::vector<std::byte>> B;
+  std::vector<std::vector<std::byte>> B(parallelization_factor_p);
   for (size_t i = 0; i < parallelization_factor_p; i++) {
     auto it = expensive_salt.begin();
     std::vector<std::byte> Bi(it + (i * block_size),
                               it + ((i + 1) * block_size));
-    B.push_back(Bi);
+    B.at(i) = Bi;
   }
 
-  // Let us mix these blocks
-  std::vector<std::vector<std::byte>> mixed_B;
-  for (size_t i = 0; i < parallelization_factor_p; i++) {
-    mixed_B.push_back(ROMix(block_size_factor_r, B.at(i), cost_factor_N));
+  // lambda expression to make parallelization easier
+  auto rommix_parallel = [](auto B, auto block_size_factor_r,
+                            auto cost_factor_N, auto mixed_B_iter, int index) {
+    *(mixed_B_iter + index) =
+        ROMix(block_size_factor_r, B.at(index), cost_factor_N);
+    return;
+  };
+
+  // Let us mix these blocks (in parallel)
+  // Inspired by https://stackoverflow.com/a/10796261
+  std::vector<std::vector<std::byte>> mixed_B(parallelization_factor_p);
+  auto mixed_B_iter = std::begin(mixed_B);
+  std::vector<std::thread> threads(parallelization_factor_p);
+  int index = 0;
+  for (auto it = std::begin(threads); it != std::end(threads); it++) {
+    *it = std::thread(rommix_parallel, B, block_size_factor_r, cost_factor_N,
+                      mixed_B_iter, index);
+    index++;
+  }
+  for (auto&& t : threads) {
+    t.join();
   }
 
   std::vector<std::byte> mixed_expensive_salt = {};
-
   for (size_t i = 0; i < parallelization_factor_p; i++) {
     auto it = mixed_expensive_salt.begin() + (i * block_size);
     mixed_expensive_salt.insert(it, mixed_B.at(i).begin(), mixed_B.at(i).end());
