@@ -1,3 +1,5 @@
+// pbkdf_test.cc - Some tests for PBKDF2
+
 #include <gtest/gtest.h>
 #include <pbkdf2.h>
 
