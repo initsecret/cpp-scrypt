@@ -1,6 +1,7 @@
 #ifndef SALSA20_H
 #define SALSA20_H
 
+#include <cstddef>
 #include <cstdint>
 #include <vector>
 
