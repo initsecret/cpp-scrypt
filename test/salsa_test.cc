@@ -1,3 +1,5 @@
+// salsa_test.cc - Some tests for Salsa
+
 #include <gtest/gtest.h>
 #include <salsa20.h>
 

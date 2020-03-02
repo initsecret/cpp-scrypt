@@ -1,3 +1,5 @@
+// scrypt_test.cc - Some tests for Scrypt
+
 #include <gtest/gtest.h>
 #include <scrypt.h>
 #include <utilities.h>
