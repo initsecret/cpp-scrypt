@@ -12,9 +12,7 @@ using namespace std;
 utilities::utilities() {}
 
 // Given a vector of bytes, returns a hex string of the bytes
-string
-utilities::bytesToHex(vector<byte> data)
-{
+string utilities::bytesToHex(vector<byte> data) {
   stringstream ss;
   ss << std::hex;
 
@@ -36,9 +34,7 @@ utilities::bytesToHex(vector<byte> data)
 
 // Given a hex string, return a vector of bytes.
 // Adapted from https://stackoverflow.com/a/3221193
-std::vector<std::byte>
-utilities::hexToBytes(std::string hex_string)
-{
+std::vector<std::byte> utilities::hexToBytes(std::string hex_string) {
   std::istringstream hex_string_stream(hex_string);
   std::vector<std::byte> data;
 
@@ -51,9 +47,7 @@ utilities::hexToBytes(std::string hex_string)
 }
 
 // Given a string, return the corresponding vector of bytes.
-std::vector<std::byte>
-utilities::stringToBytes(std::string s)
-{
+std::vector<std::byte> utilities::stringToBytes(std::string s) {
   std::vector<std::byte> data;
 
   for (size_t i = 0; i < s.size(); ++i) {

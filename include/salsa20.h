@@ -4,17 +4,16 @@
 #include <cstdint>
 #include <vector>
 
-class salsa20
-{
-private:
+class Salsa20 {
+ private:
   uint8_t rounds;
 
-public:
-  salsa20(uint8_t rounds);
-
-  void test(bool run_long_tests = false);
+ public:
+  Salsa20(uint8_t rounds = 20);
 
   std::vector<std::byte> hash(std::vector<std::byte> message);
+
+  int test_primitives();
 };
 
-#endif // SALSA20_H
+#endif  // SALSA20_H
