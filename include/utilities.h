@@ -2,6 +2,7 @@
 #define UTILITIES_H
 
 #include <cstddef>
+#include <string>
 #include <vector>
 
 class utilities {
