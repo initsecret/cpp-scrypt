@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: setup
-      run: sudo apt-get install openssl gmp
+      run: sudo apt-get install openssl libgmp3-dev
     - name: configure
       run: mkdir build && cd build && cmake ..
     - name: make
