@@ -2,6 +2,7 @@
 
 #include "pbkdf2.h"
 
+#include <cassert>
 #include <cstdlib>
 #include <iostream>
 #include <limits>
